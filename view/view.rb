@@ -10,4 +10,9 @@ module View
     end
   end
 
+  def self.get_zip_code
+    puts "Please enter your zip code:"
+    zip = gets.chomp
+  end
+
 end

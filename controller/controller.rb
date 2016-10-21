@@ -1,3 +1,6 @@
+require 'pry'
+require 'JSON'
+
 class Controller
 
   attr_reader :view, :historic_site,:site_list, :sites
@@ -19,9 +22,26 @@ class Controller
     view.display_historical_sites(sites)
   end
 
+  def get_location_from_zip
+    user_input = view.get_zip_code
+    json_string_response = open("http://maps.googleapis.com/maps/api/geocode/json?address=" + user_input).read
+    parsed_string = JSON.parse(json_string_response)
+
+    latitude = parsed_string["results"][0]["geometry"]["location"]["lat"]
+    longitude = parsed_string["results"][0]["geometry"]["location"]["lng"]
+    # binding.pry
+    return [latitude, longitude]
+  end
+
+  def distance_to_site
+
+  end
+
   def run
+    # binding.pry
     @sites = loader
-    display_sites
+    # display_sites
+    p get_location_from_zip
   end
 
 end

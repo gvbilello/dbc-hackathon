@@ -12,4 +12,8 @@ class HistoricSite
     # @location = args.fetch(:location)
   end
 
+  def distance
+
+  end
+
 end
