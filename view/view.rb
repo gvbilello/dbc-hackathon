@@ -6,6 +6,7 @@ module View
       puts "National Register Date: #{site.national_register_date}"
       puts "National Register Number: #{site.national_register_number}"
       puts "Location: (#{site.longitude}, #{site.latitude})"
+      puts "Distance: #{site.convert_to_miles} miles"
       puts "--------------------"
     end
   end
