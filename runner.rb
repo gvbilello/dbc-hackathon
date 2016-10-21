@@ -16,6 +16,8 @@ BASE_URL = "https://data.ny.gov/resource/y36f-mkpp.json"
 COUNTY_QUERY = "county="
 
 # get user input (this would be a concern for your View)
+puts "New York National Historic Sites"
+puts "--------------------------------"
 puts "What county would you like to search?"
 user_input = gets.chomp
 

@@ -15,7 +15,6 @@ class Controller
   def loader(coordinates)
     site_list.map do |site|
       historic_site.new(resource_name: site["resource_name"], national_register_date: site["national_register_date"][0..9], national_register_number: site["sphinx_number"], longitude: site["location_1"]["longitude"], latitude: site["location_1"]["latitude"], location_longitude: coordinates[0], location_latitude: coordinates[1])
-      # new_site.distance = new_site.distance_in_meters(coordinates[0].to_f, coordinates[1].to_f)
     end
   end
 
@@ -30,13 +29,21 @@ class Controller
 
     latitude = parsed_string["results"][0]["geometry"]["location"]["lat"]
     longitude = parsed_string["results"][0]["geometry"]["location"]["lng"]
-    # binding.pry
+
     return [longitude, latitude]
+  end
+
+  def limit_locations_by_distance
+    view.get_search_distance
   end
 
   def run
     coordinates = get_location_from_zip
+    miles = limit_locations_by_distance
     @sites = loader(coordinates)
+    sites.reject! do |site|
+      site.distance > miles
+    end
     display_sites
   end
 

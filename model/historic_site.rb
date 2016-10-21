@@ -5,17 +5,15 @@ class HistoricSite
 
   def initialize(args = {})
     @resource_name = args.fetch(:resource_name, "")
-    # @county = args.fetch(:county, "")
     @national_register_date = args.fetch(:national_register_date, "")
     @national_register_number = args.fetch(:national_register_number, "")
     @longitude = args.fetch(:longitude, 0).to_f
     @latitude = args.fetch(:latitude, 0).to_f
-    # @location = args.fetch(:location)
     @location_longitude = args.fetch(:location_longitude, 0).to_f
     @location_latitude = args.fetch(:location_latitude, 0).to_f
 
-
     @distance = distance_in_meters(location_longitude, location_latitude)
+    self.distance = convert_to_miles
   end
 
   def distance_in_meters(lng, lat)
